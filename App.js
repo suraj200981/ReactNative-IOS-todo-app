@@ -1,6 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image, Platform } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
+import Header from './components/Header';
 
 
 
@@ -10,6 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       {statusbar}
+      <Header title="Todo Today"/>
     </View>
   );
 }
@@ -27,10 +28,12 @@ this.state= {
 }    
   },
   container: {
+    flex:1,
     backgroundColor: 'white',
+ 
   },
   statusBar:{
     backgroundColor: '#fc7753', //outraeous orange colour
-    height:50
+    height:80
   }
 });
