@@ -15,13 +15,14 @@ const styles = StyleSheet.create({
     header:{
         backgroundColor:'#403d58',
         height: 100,
-        alignItems: 'center',
-        justifyContent:'center'
+        alignItems: 'center', // aligns the text
+        justifyContent:'center'// positions center of the componet itself
         
     },
     title:{
-        color:'grey',
-        fontSize:30,
+        color:'white',
+        fontSize:38,
+        fontWeight: 'bold'
     }
 
 });

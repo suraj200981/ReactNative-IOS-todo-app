@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Platform } from 'react-native';
 import Header from './components/Header';
+import InputBar from './components/inputBar';
+
 
 
 
@@ -11,6 +13,8 @@ export default function App() {
     <View style={styles.container}>
       {statusbar}
       <Header title="Todo Today"/>
+
+      <InputBar />
     </View>
   );
 }
