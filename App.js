@@ -65,7 +65,6 @@ const styles = StyleSheet.create({ //this is a class which is passed
 
 
 export default function App() {
-  const [ isPress, setIsPress ] = React.useState(false);
 
   const [task, setTask] = useState();
 
