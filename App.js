@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Platform, Text, TouchableOpacity, TextInput, Keyboard, ScrollView } from 'react-native';
+import { StyleSheet, View, Platform, Text, TouchableOpacity, TextInput, Keyboard, ScrollView, Alert } from 'react-native';
 import Header from './components/Header';
 import Task from './components/Task';
 
@@ -78,6 +78,11 @@ export default function App() {
     Keyboard.dismiss();
 
   }
+  const alertTodo = () => {
+    Alert.alert("Todo has been added");
+    handleAddTask();
+  }
+
 
   const statusbar = (Platform.OS == 'ios') ? <View style={styles.statusBar}></View> : <View></View> //if on iphone then show status bar else show regular view
 
@@ -91,7 +96,7 @@ export default function App() {
           style={styles.input}
           placeholder='Enter todo...'
           value={task} onChangeText={task => setTask(task)} />
-        <TouchableOpacity style={styles.touchableStyle} onPress={() => handleAddTask()}><Text style={styles.addText}>+</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.touchableStyle} onPress={() => handleAddTask()}><Text style={styles.addText} onPress={() =>alertTodo()}>+</Text></TouchableOpacity>
       </View>
       <ScrollView style={styles.toDosContainer}>
 
