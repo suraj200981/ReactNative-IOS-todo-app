@@ -71,16 +71,23 @@ export default function App() {
   const [taskItems, setTaskitems] = useState([]);
 
   const handleAddTask = () => {
+    
+    
     console.log(taskItems)  //testing to see if value is passed in arrray
 
     setTaskitems([...taskItems, task]);//appeneds new tasks to the taskitems array
     setTask("");//clear input after submit
     Keyboard.dismiss();
-
+      
   }
   const alertTodo = () => {
-    Alert.alert("Todo has been added");
-    handleAddTask();
+
+    if(task=="" || task==null){
+      Alert.alert("Cannot add an empty todo!");
+
+    }else{
+      handleAddTask();
+    }
   }
 
 
@@ -96,7 +103,7 @@ export default function App() {
           style={styles.input}
           placeholder='Enter todo...'
           value={task} onChangeText={task => setTask(task)} />
-        <TouchableOpacity style={styles.touchableStyle} onPress={() => handleAddTask()}><Text style={styles.addText} onPress={() =>alertTodo()}>+</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.touchableStyle}><Text style={styles.addText} onPress={() =>alertTodo()}>+</Text></TouchableOpacity>
       </View>
       <ScrollView style={styles.toDosContainer}>
 
