@@ -4,15 +4,17 @@ import {StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
 const Task = (props) => {
  
 
-    const [backgroundColor, setTaskCompleted] = useState("#d63230");
+    const [backgroundColor, setTaskCompletedColour] = useState("#d63230");
+    const [textDecorationLine, setTaskCompletedLine] =useState("")
     
         return(
         <TouchableOpacity onLongPress={() =>{
            console.log("Long press achieved");
-           setTaskCompleted("green");
+           setTaskCompletedColour("green");
+           setTaskCompletedLine("line-through")
         }} delayLongPress={300}>
         <View style={[styles.taskContainer,{backgroundColor}]}>
-            <Text style={styles.textStyle}> {props.text}</Text>
+            <Text style={[styles.textStyle,{textDecorationLine}]}> {props.text}</Text>
         </View>
         </TouchableOpacity>
     )
@@ -37,6 +39,8 @@ const styles = StyleSheet.create({ //this is a class which is passed
         color:'white',
         fontWeight:'bold',
         fontSize:28,
+        textDecorationStyle: 'double',
+        textDecorationColor:'black',
 
     }
 
