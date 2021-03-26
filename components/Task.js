@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Vibration } from 'react-native';
 import Header from './Header'
 
 const Task = (props) => {
@@ -35,6 +35,7 @@ const Task = (props) => {
             setTaskCompletedColour("green");
             setTaskCompletedLine("line-through");
             setTaskCount(taskCount - 1);
+            Vibration.vibrate(10 * (1*1000))
 
         }
     }
