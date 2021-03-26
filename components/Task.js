@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
+import Header from './Header'
 
 const Task = (props) => {
 
 
     const [backgroundColor, setTaskCompletedColour] = useState("#d63230");
     const [textDecorationLine, setTaskCompletedLine] = useState("");
-    const [isPressed, setPress] = useState(true);
+    const [isPressed, setPress] = useState(false);
+    const [taskCount, setTaskCount] = useState(0);
 
 
     const checkPressed = () => {
@@ -20,23 +22,30 @@ const Task = (props) => {
         }
     }
 
-    const unCompleteTask = () => {
+    const completeTask = () => {
 
-        if(isPressed == false) {
+        if (isPressed == true) {
             setTaskCompletedColour("#d63230");
-        }else{
+            setTaskCompletedLine("");
+            setTaskCount(taskCount + 1);
+            <Header newt="sdfsdf"/>
+
+
+        } else {
             setTaskCompletedColour("green");
+            setTaskCompletedLine("line-through");
+            setTaskCount(taskCount - 1);
 
         }
-
     }
 
     return (
+         
         <TouchableOpacity onLongPress={() => {
             checkPressed();
-           
-            setTaskCompletedLine("line-through")
+            completeTask();
         }} delayLongPress={300} >
+
             <View style={[styles.taskContainer, { backgroundColor }]}>
                 <Text style={[styles.textStyle, { textDecorationLine }]}> {props.text}</Text>
             </View>
