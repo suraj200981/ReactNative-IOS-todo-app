@@ -89,6 +89,7 @@ export default function App() {
       handleAddTask();
     }
   }
+  const [intVal, setIntVal] = useState(0);
 
 
   const statusbar = (Platform.OS == 'ios') ? <View style={styles.statusBar}></View> : <View></View> //if on iphone then show status bar else show regular view
@@ -96,7 +97,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       {statusbar}
-      <Header title="Todo Today" />
+      <Header title="Todo Today" num={intVal}/>
+
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -109,7 +111,7 @@ export default function App() {
 
         {
           taskItems.map((item)=>{
-            return <Task text={item} />
+            return <Task text={item}  countVal={intVal}  /> 
           })
         }
       </ScrollView>

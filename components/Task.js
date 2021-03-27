@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Vibration } from 'react-native';
-import Header from './Header'
+import Header from './Header';
 
-const Task = (props) => {
+
+const Task = (props,countVal) => {
 
 
     const [backgroundColor, setTaskCompletedColour] = useState("#d63230");
@@ -28,29 +29,32 @@ const Task = (props) => {
             setTaskCompletedColour("#d63230");
             setTaskCompletedLine("");
             setTaskCount(taskCount + 1);
-            <Header newt="sdfsdf"/>
+            countVal+=taskCount;
+
 
 
         } else {
             setTaskCompletedColour("green");
             setTaskCompletedLine("line-through");
             setTaskCount(taskCount - 1);
-            Vibration.vibrate(10 * (1*1000))
+            Vibration.vibrate(10 * (1 * 1000));
 
         }
     }
 
     return (
-         
+
         <TouchableOpacity onLongPress={() => {
             checkPressed();
             completeTask();
-        }} delayLongPress={300} >
+           
 
+        }} delayLongPress={300} >
             <View style={[styles.taskContainer, { backgroundColor }]}>
                 <Text style={[styles.textStyle, { textDecorationLine }]}> {props.text}</Text>
             </View>
         </TouchableOpacity>
+
     )
 }
 
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({ //this is a class which is passed
         textDecorationStyle: 'double',
         textDecorationColor: 'black',
 
-    }
+    },
 
 })
 
