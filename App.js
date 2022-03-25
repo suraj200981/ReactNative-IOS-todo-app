@@ -84,7 +84,9 @@ export default function App() {
           })
         }
       </ScrollView>
-        <TouchableOpacity style={styles.touchableStyle}><Text style={styles.addText} onPress={() =>getTodos()}>Get Todos</Text></TouchableOpacity>
+        <TouchableOpacity style={{width:150,height:50, backgroundColor:'black', borderRadius:15, textAlign:'center', marginLeft:140, marginBottom:20, paddingTop:5}}>
+          <Text style={{color:'white', fontSize:30, textAlign:'center'}} onPress={() =>getTodos()}>Load</Text>
+        </TouchableOpacity>
     </View>
   );
 }

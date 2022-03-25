@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Vibration } from 'react-native';
-import Header from './Header';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function Task(props) {
@@ -29,6 +29,7 @@ function Task(props) {
             setTaskCompletedColour("#d63230");
             setTaskCompletedLine("");
             setTaskCount(taskCount + 1);
+
         } else {
             setTaskCompletedColour("green");
             setTaskCompletedLine("line-through");
