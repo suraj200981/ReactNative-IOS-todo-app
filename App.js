@@ -3,7 +3,94 @@ import { StyleSheet, View, Platform, Text, TouchableOpacity, TextInput, Keyboard
 import Header from './components/Header';
 import Task from './components/Task';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
+
+export default function App() {
+
+  const [task, setTask] = useState();
+
+  const [taskItems, setTaskitems] = useState([]);
+
+  const [intVal, setIntVal] = useState(0);
+
+  const handleAddTask = () => {
+    
+    
+    console.log(taskItems)  //testing to see if value is passed in arrray
+
+    setTaskitems([...taskItems, task]);//appeneds new tasks to the taskitems array
+    setTask("");//clear input after submit
+    Keyboard.dismiss();
+
+    //save tasks to local storage
+    AsyncStorage.setItem('tasks', JSON.stringify(taskItems));
+  }
+
+  function getTodos(){
+    AsyncStorage.getItem('tasks').then(
+      (result) => {
+        if(result){
+          setTaskitems(JSON.parse(result));
+        }
+      }
+    )
+  }
+
+
+
+  const alertTodo = () => {
+
+    if(task=="" || task==null){
+      Alert.alert("Cannot add an empty todo!");
+
+    }else{
+      handleAddTask();
+    }
+  }
+  function getCompleteTask(isPressed) {
+    //if completed 
+    if(isPressed==false){
+      //console.log(isPressed);
+       setIntVal(intVal + 1);
+    }else{
+     // console.log(isPressed);
+      setIntVal(intVal - 1);
+    }
+  }
+
+
+
+  const statusbar = (Platform.OS == 'ios') ? <View style={styles.statusBar}></View> : <View></View> //if on iphone then show status bar else show regular view
+
+  return (
+    <View style={styles.container}>
+      {statusbar}
+      <Header title="Todo Today" num={intVal}/>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder='Enter todo...'
+          value={task} onChangeText={task => setTask(task)} />
+        <TouchableOpacity style={styles.touchableStyle}><Text style={styles.addText} onPress={() =>alertTodo()}>+</Text></TouchableOpacity>
+      </View>
+      <ScrollView style={styles.toDosContainer}>
+
+        {
+          taskItems.map((item)=>{
+            return <Task text={item} incrementCountFunc={getCompleteTask}  /> 
+          })
+        }
+      </ScrollView>
+        <TouchableOpacity style={styles.touchableStyle}><Text style={styles.addText} onPress={() =>getTodos()}>Get Todos</Text></TouchableOpacity>
+    </View>
+  );
+}
+
+
+//styles
 const styles = StyleSheet.create({ //this is a class which is passed
 
   container: {
@@ -61,75 +148,3 @@ const styles = StyleSheet.create({ //this is a class which is passed
 
   }
 });
-
-
-
-export default function App() {
-
-  const [task, setTask] = useState();
-
-  const [taskItems, setTaskitems] = useState([]);
-
-  const [intVal, setIntVal] = useState(0);
-
-  const handleAddTask = () => {
-    
-    
-    console.log(taskItems)  //testing to see if value is passed in arrray
-
-    setTaskitems([...taskItems, task]);//appeneds new tasks to the taskitems array
-    setTask("");//clear input after submit
-    Keyboard.dismiss();
-  }
-
-
-
-  const alertTodo = () => {
-
-    if(task=="" || task==null){
-      Alert.alert("Cannot add an empty todo!");
-
-    }else{
-      handleAddTask();
-    }
-  }
-  function getCompleteTask(isPressed) {
-    //if completed 
-    if(isPressed==false){
-      //console.log(isPressed);
-       setIntVal(intVal + 1);
-    }else{
-     // console.log(isPressed);
-      setIntVal(intVal - 1);
-    }
-  }
-
-
-
-  const statusbar = (Platform.OS == 'ios') ? <View style={styles.statusBar}></View> : <View></View> //if on iphone then show status bar else show regular view
-
-  return (
-    <View style={styles.container}>
-      {statusbar}
-      <Header title="Todo Today" num={intVal}/>
-
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder='Enter todo...'
-          value={task} onChangeText={task => setTask(task)} />
-        <TouchableOpacity style={styles.touchableStyle}><Text style={styles.addText} onPress={() =>alertTodo()}>+</Text></TouchableOpacity>
-      </View>
-      <ScrollView style={styles.toDosContainer}>
-
-        {
-          taskItems.map((item)=>{
-            return <Task text={item} incrementCountFunc={getCompleteTask}  /> 
-          })
-        }
-      </ScrollView>
-
-    </View>
-  );
-}
-

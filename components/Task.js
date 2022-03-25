@@ -7,7 +7,7 @@ function Task(props) {
 
     const name = "suraj sharma";
     const [backgroundColor, setTaskCompletedColour] = useState("#d63230");
-    const [textDecorationLine, setTaskCompletedLine] = useState("");
+    const [textDecorationLine, setTaskCompletedLine] = useState("none");
     const [isPressed, setPress] = useState(false);
     const [taskCount, setTaskCount] = useState(0);
 
