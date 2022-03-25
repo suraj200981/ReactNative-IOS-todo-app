@@ -3,9 +3,9 @@ import { StyleSheet, Text, TouchableOpacity, View, Vibration } from 'react-nativ
 import Header from './Header';
 
 
-const Task = (props,countVal) => {
+function Task(props) {
 
-
+    const name = "suraj sharma";
     const [backgroundColor, setTaskCompletedColour] = useState("#d63230");
     const [textDecorationLine, setTaskCompletedLine] = useState("");
     const [isPressed, setPress] = useState(false);
@@ -29,25 +29,23 @@ const Task = (props,countVal) => {
             setTaskCompletedColour("#d63230");
             setTaskCompletedLine("");
             setTaskCount(taskCount + 1);
-            countVal+=taskCount;
-
-
-
         } else {
             setTaskCompletedColour("green");
             setTaskCompletedLine("line-through");
+            if(taskCount>0){
             setTaskCount(taskCount - 1);
+            }
             Vibration.vibrate(10 * (1 * 1000));
 
         }
     }
 
     return (
-
+        
         <TouchableOpacity onLongPress={() => {
             checkPressed();
             completeTask();
-           
+            props.incrementCountFunc(isPressed);
 
         }} delayLongPress={300} >
             <View style={[styles.taskContainer, { backgroundColor }]}>
