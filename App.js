@@ -37,9 +37,6 @@ export default function App() {
       }
     )
   }
-
-
-
   const alertTodo = () => {
 
     if(task=="" || task==null){
@@ -50,15 +47,33 @@ export default function App() {
     }
   }
   function getCompleteTask(isPressed) {
-    //if completed 
     if(isPressed==false){
-      //console.log(isPressed);
        setIntVal(intVal + 1);
     }else{
-     // console.log(isPressed);
       setIntVal(intVal - 1);
     }
   }
+
+  function AllTasksCompletedYes(){
+    setTaskitems([]);
+    setIntVal(0);
+    AsyncStorage.setItem('tasks', JSON.stringify(taskItems));
+  }
+
+
+  function allTasksCompleted(){
+    console.log("-----------")
+    console.log("Total Tasks in Array: "+taskItems.length);
+    console.log("Completed Tasks: "+intVal);
+    console.log("-----------")
+    //check if intVal is 1 less then taskItems.length
+    if(intVal==taskItems.length-1){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 
 
 
@@ -80,7 +95,11 @@ export default function App() {
 
         {
           taskItems.map((item)=>{
-            return <Task text={item} incrementCountFunc={getCompleteTask}  /> 
+            return <Task text={item}
+            incrementCountFunc={getCompleteTask}
+            taskArrLength={taskItems.length}
+            allCompleted={allTasksCompleted}
+            allCompletedYes={AllTasksCompletedYes}/> 
           })
         }
       </ScrollView>
